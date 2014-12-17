@@ -1,11 +1,13 @@
 #lang racket
 
-(provide abs)
+;;func abs
 
 (define (abs x)
   (if (< x 0)
       (- x)
       x))
+
+;;func sqrt
 
 (define (sqrt-iter guess x)
   (if (good-enough? guess x)
@@ -25,7 +27,27 @@
 (define (square x)
   (* x x))
 
-(provide sqrt)
+(define (cube x)
+  (* x x x))
 
 (define (sqrt x)
   (sqrt-iter 1.0 x))
+
+;;func even?
+
+(define (even? n)
+  (= (remainder n 2) 0))
+
+;;func fast-expt
+
+(define (fast-expt b n)
+  (cond ((= n 0) 1)
+        ((even? n) (square (fast-expt b (/ n 2))))
+        (else (* b (fast-expt b (- n 1))))))
+
+;;export part
+(provide abs)
+(provide sqrt)
+(provide square)
+(provide cube)
+(provide even?)
