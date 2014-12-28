@@ -45,9 +45,34 @@
         ((even? n) (square (fast-expt b (/ n 2))))
         (else (* b (fast-expt b (- n 1))))))
 
+;;func gcd
+
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+
+;;func prime?
+
+(define (smallest-divisor n)
+  (find-divisor n 2))
+
+(define (divides? a b)
+  (= (remainder b a) 0))
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (+ 1 test-divisor)))))
+
+(define (prime? x)
+  (= (smallest-divisor x) x))
+
 ;;export part
 (provide abs)
 (provide sqrt)
 (provide square)
 (provide cube)
 (provide even?)
+(provide gcd)
+(provide prime?)
